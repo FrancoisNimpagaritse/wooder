@@ -4,4 +4,56 @@
 
 {% block content %}
     <h1>Information sur les projets.</h1>
+    <div>
+        <div class="row justify-content-center">
+            <br>
+            <div class="col-md-4 mt-5">
+                <h4 class="text-center">Création Projet</h4>
+                <br />
+                <form action="" method="POST">
+                  <div class="mb-3">
+                    <label for="title" class="form-label">Intitulé</label>
+                    <input type="text" id="title" class="form-control" name="title" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="description" class="form-label">Détails</label>
+                      <textarea id="description" class="form-control" name="description"></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="date_start" class="form-label">Date début</label>
+                    <input type="date" id="date_start" class="form-control" name="date_start">
+                  </div>
+                  <div class="mb-3">
+                    <label for="date_end" class="form-label">Date fin provisoire</label>
+                    <input type="date" id="date_end" class="form-control" name="date_end">
+                  </div>
+                  <button type="submit" class="btn btn-secondary">Créer</button>
+                </form>
+                <br />
+                <h4 class="text-center">Projets existants</h4>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Intitulé</th>
+                      <th scope="col">Début</th>
+                      <th scope="col">Fin</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@mdo</td>
+                        <td>
+                            <a href="" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                            <a href="" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+    </div>
 {% endblock %}}

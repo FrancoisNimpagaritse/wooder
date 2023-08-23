@@ -1,11 +1,9 @@
 
 from flask import Flask, render_template, url_for, request, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
+from flask_login import UserMixin, LoginManager
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError
+from flask_login import login_user, login_required, logout_user, current_user
 
 db = SQLAlchemy()
 app = Flask(__name__)
@@ -15,6 +13,15 @@ app.config['SECRET_KEY'] = 'thisisascretkey'
 
 db.init_app(app)
 app.app_context().push()
+
+login_manager = LoginManager()
+login_manager.login_view = 'login'
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 
 class User(db.Model, UserMixin):
@@ -52,20 +59,34 @@ class Sale(db.Model):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', user=current_user)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        print("email: " + request.form.get('email'))
-        print("password: " + request.form.get('password'))
-    return render_template('login.html')
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        user = User.query.filter_by(email=email).first()
+        if user:
+            if check_password_hash(user.password, password):
+                flash('Connexion réussie.', category='success')
+                login_user(user, remember=True)
+                return redirect(url_for('index'))
+            else:
+                flash('Identifiants incorrects!', category='error')
+        else:
+            flash('Cet email n\'existe pas!', category='error')
+
+    return render_template('login.html', user=current_user)
 
 
 @app.route('/logout')
+@login_required
 def logout():
-    return render_template('index.html')
+    logout_user()
+    return redirect(url_for('login'))
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -77,7 +98,10 @@ def register():
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
-        if len(firstname) < 2:
+        user = User.query.filter_by(email=email)
+        if user:
+            flash('Un autilisateur avec cet email existe déjà! Choisissez un autre.', category='error')
+        elif len(firstname) < 2:
             flash('Le prénom doit avoir aumoins 4 caractères !', category='error')
         elif len(lastname) < 4:
             flash('Le nom doit avoir aumoins 4 caractères !', category='error')
@@ -96,27 +120,31 @@ def register():
             flash('Compte crée correctement.', category='success')
             return redirect(url_for('index'))
 
-    return render_template('register.html')
+    return render_template('register.html', user=current_user)
 
 
 @app.route('/dashboard')
+@login_required
 def dashboard():
-    return render_template('dashboard.html')
+    return render_template('dashboard.html', user=current_user)
 
 
 @app.route('/project')
+@login_required
 def project():
-    return render_template('projects.html')
+    return render_template('projects.html', user=current_user)
 
 
 @app.route('/expense')
+@login_required
 def expense():
-    return render_template('expenses.html')
+    return render_template('expenses.html', user=current_user)
 
 
 @app.route('/sale')
+@login_required
 def sale():
-    return render_template('sales.html')
+    return render_template('sales.html', user=current_user)
 
 
 if __name__ == '__main__':
