@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Edition Projet{% endblock %}}
+
+{% block content %}
+        <div class="row justify-content-center">
+            <br>
+            <div class="col-md-4 mt-5">
+                <h5 class="text-center bg-info text-white p-3 rounded">Modification Projet: <b>{{ project.title }}</b></h5>
+                <br />
+                <form action="" method="POST">
+                  <div class="mb-3">
+                    <label for="title" class="form-label">Intitulé</label>
+                    <input type="text" id="title" class="form-control" name="title" value="{{project.title}}">
+                  </div>
+                  <div class="mb-3">
+                    <label for="description" class="form-label">Détails</label>
+                      <textarea id="description" class="form-control" name="description">{{project.description}}</textarea>
+                  </div>
+                  <div class="row">
+                      <div class="mb-3 col">
+                        <label for="date_start" class="form-label">Date début</label>
+                        <input type="date" id="date_start" class="form-control" name="date_start" value="{{project.date_start}}">
+                      </div>
+                      <div class="mb-3 col">
+                        <label for="date_end" class="form-label">Date fin provisoire</label>
+                        <input type="date" id="date_end" class="form-control" name="date_end" value="{{project.date_end}}">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="mb-3 col">
+                        <label for="estimated_cost" class="form-label">Coût estimé</label>
+                        <input type="text" id="estimated_cost" class="form-control" name="estimated_cost" value="{{project.estimated_cost}}">
+                      </div>
+                      <div class="mb-3 col">
+                        <label for="estimated_revenue" class="form-label">Revenu estimé</label>
+                        <input type="text" id="estimated_revenue" class="form-control" name="estimated_revenue" value="{{project.estimated_revenue}}">
+                      </div>
+                  </div>
+                  <div class="row">
+                  <button type="submit" class="btn btn-secondary btn-block">Modifier</button>
+                    <br />
+                    <br />
+                  </div>
+                </form>
+            </div>
+        </div>
+{% endblock %}}

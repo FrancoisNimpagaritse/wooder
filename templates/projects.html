@@ -3,12 +3,12 @@
 {% block title %}Détails Projet{% endblock %}}
 
 {% block content %}
-    <h1>Information sur les projets.</h1>
+    <h1  class="text-center mt-3">Gestion projets.</h1>
     <div>
         <div class="row justify-content-center">
             <br>
             <div class="col-md-4 mt-5">
-                <h4 class="text-center">Création Projet</h4>
+                <h5 class="text-center bg-info text-white p-3 rounded">Création Projet</h5>
                 <br />
                 <form action="" method="POST">
                   <div class="mb-3">
@@ -19,39 +19,64 @@
                     <label for="description" class="form-label">Détails</label>
                       <textarea id="description" class="form-control" name="description"></textarea>
                   </div>
-                  <div class="mb-3">
-                    <label for="date_start" class="form-label">Date début</label>
-                    <input type="date" id="date_start" class="form-control" name="date_start">
+                  <div class="row">
+                      <div class="mb-3 col">
+                        <label for="date_start" class="form-label">Date début</label>
+                        <input type="date" id="date_start" class="form-control" name="date_start">
+                      </div>
+                      <div class="mb-3 col">
+                        <label for="date_end" class="form-label">Date fin provisoire</label>
+                        <input type="date" id="date_end" class="form-control" name="date_end">
+                      </div>
                   </div>
-                  <div class="mb-3">
-                    <label for="date_end" class="form-label">Date fin provisoire</label>
-                    <input type="date" id="date_end" class="form-control" name="date_end">
+                  <div class="row">
+                      <div class="mb-3 col">
+                        <label for="estimated_cost" class="form-label">Coût estimé</label>
+                        <input type="text" id="estimated_cost" class="form-control" name="estimated_cost">
+                      </div>
+                      <div class="mb-3 col">
+                        <label for="estimated_revenue" class="form-label">Revenu estimé</label>
+                        <input type="text" id="estimated_revenue" class="form-control" name="estimated_revenue">
+                      </div>
                   </div>
-                  <button type="submit" class="btn btn-secondary">Créer</button>
+                  <div class="row">
+                  <button type="submit" class="btn btn-secondary btn-block">Créer</button>
+                  </div>
+                    <br />
                 </form>
+            </div>
+
+            <div>
                 <br />
-                <h4 class="text-center">Projets existants</h4>
                 <table class="table">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Intitulé</th>
+                      <th scope="col">Propriétaire</th>
+                      <th> Coût estimatif</th>
+                      <th> Revenu estimatif</th>
                       <th scope="col">Début</th>
                       <th scope="col">Fin</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
+                  {% for project in projects%}
                     <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                        <td>
-                            <a href="" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                            <a href="" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                        </td>
+                      <th scope="row">{{ project.id }}</th>
+                      <td>{{ project.title }}</td>
+                      <td>{{ project.user_id }}</td>
+                      <td>{{ project.estimated_cost }}</td>
+                      <td>{{ project.estimated_revenue }}</td>
+                      <td>{{ project.date_start }}</td>
+                      <td>{{ project.date_end }}</td>
+                      <td>
+                        <a href="{{ url_for('project_edit', id=project.id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                        <a href="/project_delete/{{project.id}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                      </td>
                     </tr>
+                  {% endfor %}
                   </tbody>
                 </table>
             </div>
