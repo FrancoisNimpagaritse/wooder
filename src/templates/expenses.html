@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Dépenses{% endblock %}}
+
+{% block content %}
+    <h1  class="text-center mt-3">Suivi dépenses.</h1>
+    <div>
+        <div class="row justify-content-center">
+            <br>
+            <div class="col-md-4 mt-5">
+                <h5 class="text-center bg-info text-white p-3 rounded">Saisie dépense</h5>
+                <br />
+                <form action="" method="POST">
+                  <div class="mb-3">
+                    <label for="amount" class="form-label">Montant</label>
+                    <input type="text" id="amount" class="form-control" name="amount" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="description" class="form-label">Libellé</label>
+                      <textarea id="description" class="form-control" name="description"></textarea>
+                  </div>
+                  <div class="row">
+                      <div class="mb-3 col">
+                        <label for="date_transaction" class="form-label">Date début</label>
+                        <input type="date" id="date_transaction" class="form-control" name="date_transaction">
+                      </div>
+                      <div class="mb-3 col">
+                        <label for="projet_id" class="form-label">Projet lié</label>
+                          <select name="project_id" id="projet_id">
+                              <option value="">Choisir projet..</option>
+                              {% for project in projects %}
+                              <option value="{{ project.id }}">{{ project.title }}</option>
+                              {% endfor %}
+                          </select>
+                      </div>
+                  </div>
+                  <div class="row">
+                  <button type="submit" class="btn btn-secondary btn-block">Ajouter</button>
+                  </div>
+                    <br />
+                </form>
+            </div>
+
+            <div>
+                <br />
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Intitulé</th>
+                      <th scope="col">Montant</th>
+                      <th> Date dépense</th>
+                      <th> Saisie par</th>
+                      <th scope="col">Projet lié</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for expense in expenses%}
+                    <tr>
+                      <th scope="row">{{ expense.id }}</th>
+                      <td>{{ expense.description }}</td>                      >
+                      <td>{{ expense.amount }}</td>
+                      <td>{{ expense.date_transaction }}</td>
+                      <td>{{ expense.user_rel.firstname }} {{ expense.user_rel.lastname }}</td>
+                      <td>{{ expense.business_rel.title }}</td>
+                      <td>
+                        <a href="{{ url_for('views.expense_edit', id=expense.id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                        <a href="/expense_delete/{{expense.id}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}}
