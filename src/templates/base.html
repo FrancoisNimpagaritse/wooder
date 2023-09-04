@@ -30,8 +30,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('views.dashboard') }}">Dashboard</a>
             </li>
+              <!-- To be pushed to the right -->
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+              <a class="nav-link" href="{{ url_for('auth.logout') }}"><span class="fa fa-user"> {{current_user.firstname}}</span> Logout</a>
             </li>
             {% else %}
             <li class="nav-item">

@@ -3,17 +3,23 @@
 {% block title %}Détails Projet{% endblock %}}
 
 {% block content %}
-    <h1  class="text-center mt-3">Gestion projets.</h1>
+    <h1  class="text-center bg-secondary text-white mt-3">Gestion projets</h1>
     <div>
         <div class="row justify-content-center">
             <br>
             <div class="col-md-4 mt-5">
-                <h5 class="text-center bg-info text-white p-3 rounded">Création Projet</h5>
+                <h5 class="text-center bg-primary-subtle text-white p-3 rounded">Création Projet</h5>
                 <br />
                 <form action="" method="POST">
                   <div class="mb-3">
                     <label for="title" class="form-label">Intitulé</label>
                     <input type="text" id="title" class="form-control" name="title" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <input class="form-check-input" type="checkbox" name="active" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Encours
+                    </label>
                   </div>
                   <div class="mb-3">
                     <label for="description" class="form-label">Détails</label>
@@ -32,11 +38,11 @@
                   <div class="row">
                       <div class="mb-3 col">
                         <label for="estimated_cost" class="form-label">Coût estimé</label>
-                        <input type="text" id="estimated_cost" class="form-control" name="estimated_cost">
+                        <input type="number" id="estimated_cost" class="form-control" name="estimated_cost">
                       </div>
                       <div class="mb-3 col">
                         <label for="estimated_revenue" class="form-label">Revenu estimé</label>
-                        <input type="text" id="estimated_revenue" class="form-control" name="estimated_revenue">
+                        <input type="number" id="estimated_revenue" class="form-control" name="estimated_revenue">
                       </div>
                   </div>
                   <div class="row">
@@ -53,6 +59,7 @@
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Intitulé</th>
+                      <th scope="col">Ecours</th>
                       <th scope="col">Responsable</th>
                       <th> Coût estimatif</th>
                       <th> Revenu estimatif</th>
@@ -66,11 +73,12 @@
                     <tr>
                       <th scope="row">{{ project.id }}</th>
                       <td>{{ project.title }}</td>
+                      <td>{% if project.active %} <h6 class="bg-info text-white text-center rounded-circle">oui</h6> {% else %} <h6 class="bg-danger rounded-circle text-white text-center">non</h6>{% endif %}</td>
                       <td>{{ project.user_rel.firstname }} {{ project.user_rel.lastname }}</td>
-                      <td>{{ project.estimated_cost }}</td>
-                      <td>{{ project.estimated_revenue }}</td>
-                      <td>{{ project.date_start }}</td>
-                      <td>{{ project.date_end }}</td>
+                      <td>{{ "{:,.0f}".format(project.estimated_cost) }}</td>
+                      <td>{{ "{:,.0f}".format(project.estimated_revenue) }}</td>
+                      <td>{{ project.date_start.strftime('%d-%m-%Y') }}</td>
+                      <td>{{ project.date_end.strftime('%d-%m-%Y') }}</td>
                       <td>
                         <a href="{{ url_for('views.project_edit', id=project.id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
                         <a href="/project_delete/{{project.id}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>

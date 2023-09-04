@@ -19,15 +19,18 @@ class Business(db.Model):
     estimated_revenue = db.Column(db.Integer)
     date_start = db.Column(db.Date(), nullable=False)
     date_end = db.Column(db.Date(), nullable=False)
+    active = db.Column(db.Boolean, default=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user_rel = relationship("User", foreign_keys="[Business.user_id]")
 
 
 class Expense(db.Model):
-    amount = db.Column(db.Integer, nullable=False)
     id = db.Column(db.Integer, primary_key=True)
+    amount = db.Column(db.Integer, nullable=False)
+    category = db.Column(db.String(50), nullable=True)
     date_transaction = db.Column(db.Date(), nullable=False)
     description = db.Column(db.String(255), nullable=False)
+    financier = db.Column(db.String(50), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user_rel = relationship("User", foreign_keys="[Expense.user_id]")
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'))

@@ -3,15 +3,22 @@
 {% block title %}Edition Projet{% endblock %}}
 
 {% block content %}
+        <h1  class="text-center bg-secondary text-white mt-3">Gestion projets</h1>
         <div class="row justify-content-center">
             <br>
             <div class="col-md-4 mt-5">
-                <h5 class="text-center bg-info text-white p-3 rounded">Modification Projet: <b>{{ project.title }}</b></h5>
+                <h5 class="text-center bg-primary-subtle text-white p-3 rounded">Modification Projet: <b>{{ project.title }}</b></h5>
                 <br />
                 <form action="" method="POST">
                   <div class="mb-3">
                     <label for="title" class="form-label">Intitulé</label>
                     <input type="text" id="title" class="form-control" name="title" value="{{project.title}}">
+                  </div>
+                  <div class="mb-3">
+                    <input class="form-check-input" type="checkbox" name="active" value="{{ project.active }}" id="active">
+                    <label class="form-check-label" for="active">
+                        Encours
+                    </label>
                   </div>
                   <div class="mb-3">
                     <label for="description" class="form-label">Détails</label>
@@ -30,11 +37,11 @@
                   <div class="row">
                       <div class="mb-3 col">
                         <label for="estimated_cost" class="form-label">Coût estimé</label>
-                        <input type="text" id="estimated_cost" class="form-control" name="estimated_cost" value="{{project.estimated_cost}}">
+                        <input type="number" id="estimated_cost" class="form-control" name="estimated_cost" value="{{project.estimated_cost}}">
                       </div>
                       <div class="mb-3 col">
                         <label for="estimated_revenue" class="form-label">Revenu estimé</label>
-                        <input type="text" id="estimated_revenue" class="form-control" name="estimated_revenue" value="{{project.estimated_revenue}}">
+                        <input type="number" id="estimated_revenue" class="form-control" name="estimated_revenue" value="{{project.estimated_revenue}}">
                       </div>
                   </div>
                   <div class="row">

@@ -3,17 +3,30 @@
 {% block title %}Dépences{% endblock %}}
 
 {% block content %}
-    <h1  class="text-center mt-3">Suivi dépenses.</h1>
+    <h1  class="text-center bg-secondary text-white mt-3">Suivi dépenses.</h1>
     <div>
         <div class="row justify-content-center">
             <br>
             <div class="col-md-4 mt-5">
-                <h5 class="text-center bg-info text-white p-3 rounded">Modification dépense</h5>
+                <h5 class="text-center bg-danger-subtle text-white p-3 rounded">Modification dépense</h5>
                 <br />
                 <form action="" method="POST">
-                  <div class="mb-3">
-                    <label for="amount" class="form-label">Montant</label>
-                    <input type="text" id="amount" class="form-control" name="amount" value="{{ expense.amount }}">
+                  <div class="row">
+                      <div class="mb-3 col">
+                        <label for="amount" class="form-label">Montant</label>
+                        <input type="number" id="amount" class="form-control" name="amount" value="{{ expense.amount }}">
+                      </div>
+                      <div class="mb-3 col">
+                        <label for="category">Catégorie:</label>
+                        <select class="form-control" id="category" name="category">
+                            <option value="{{ expense.category }}" selected>{{ expense.category }}</option>
+                            <option value="Capital">Capital</option>
+                            <option value="MO ouvriers">MO ouvriers</option>
+                            <option value="MO supervision">MO supervision</option>
+                            <option value="Déplacement">Déplacement</option>
+                            <option value="Communication">Communication</option>
+                        </select>
+                      </div>
                   </div>
                   <div class="mb-3">
                     <label for="description" class="form-label">Libellé</label>
@@ -21,17 +34,26 @@
                   </div>
                   <div class="row">
                       <div class="mb-3 col">
-                        <label for="date_transaction" class="form-label">Date début</label>
+                        <label for="date_transaction" class="form-label">Date opération</label>
                         <input type="date" id="date_transaction" class="form-control" name="date_transaction" value="{{ expense.date_transaction }}">
                       </div>
                       <div class="mb-3 col">
                         <label for="projet_id" class="form-label">Projet lié</label>
-                          <select name="project_id" id="projet_id">
+                          <select class="form-control" name="project_id" id="projet_id">
                               <option value="{{ expense.business_id }}">{{expense.business_rel.title}}</option>
                               {% for project in projects %}
                               <option value="{{ project.id }}">{{ project.title }}</option>
                               {% endfor %}
                           </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="financier" class="form-label">Financier:</label>
+                        <select class="form-control" id="financier" name="financier" >
+                            <option value="{{ expense.financier }}" selected>{{ expense.financier }}</option>
+                            <option value="François">François</option>
+                            <option value="Nick">Nick</option>
+                            <option value="Koffi">Koffi</option>
+                        </select>
                       </div>
                   </div>
                   <div class="row">
