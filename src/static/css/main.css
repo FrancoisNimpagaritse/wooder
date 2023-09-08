@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+    --main-color: #5E376D;
+    --color-dark: #1D2231;
+    --text-grey: #8390A2;
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+    box-sizing: border-box;
+}
+
+.form-card {
+font-size: .7rem;
+}
+
+.date_class, .choice_class {
+    font-size: .7rem;
+}
+
+.menu_class {
+    background: #5E376D;
+}
+
+#navbarNav {
+    display: flex;
+    justify-content: space-between;
+}
+
+#navbarNav li a {
+    color: white;
+}
+.table-card h3 {
+    color: var(--text-grey);
+    margin: .5rem;
+    font-size: 1rem;
+}
+
+.table-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-card thead {
+    background-color: #efefef;
+    text-align: left;
+}
+
+th, td {
+    font-size: .7rem;
+    padding: .5rem .3rem;
+    color: var(--color-dark);
+ }
+
+tbody tr:nth-child(even) {
+    background: #f9fafc;
+ }
+
+ .badge {
+    padding: .2rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+ }
+
+ .badge.success {
+    background: #DEF7EC;
+    color: var(--main-color);
+ }
+
+.badge.info {
+    background: #8db5b2;
+    color: white;
+ }
+
+.badge.warning {
+    background: #F0F6B2;
+    color: orange;
+ }
+
+.badge.danger {
+    background: #e0541d;
+    color: white;
+ }
+
+.home-card-body  {
+    /* background: green; */
+}
+
+.home-img {
+    /* background: blue; */
+    width: 350px;
+    height: 350px;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 15px auto;
+}
+
+.home-card-footer {
+    background: #4C5270;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 10px;
+}
+
+/* Navbar responsive - Media queries */

@@ -15,18 +15,74 @@ def index():
 @views.route('/dashboard')
 @login_required
 def dashboard():
-    list_total_expense_per_project()
-    list_total_sales_per_project()
+    list_expenses = list_total_expense_per_project()
+    list_sales = list_total_sales_per_project()
 
-    return render_template('dashboard.html', user=current_user)
+    new_list_expenses = []
+    # create last dict(key: str, val: list)
+    print('-----Final------')
+    for key in list_expenses.keys():
+        if key in list_sales:
+            list_expenses[key].append(list_sales[key][0])
+        else:
+            list_expenses[key].append(0)
+    # convert list of dicts to list of lists [key, [vals]]
+    for key, vals in list_expenses.items():
+        new_list_expenses.append([key, vals])
+
+    stats = [all_projects(), active_projects(), closed_projects()]
+
+    return render_template('dashboard.html', user=current_user, new_list_expenses=new_list_expenses, stats=stats)
 
 
 def list_total_expense_per_project(): # active project ==> add status(active/closed) field on project
-    pass # project_id: total_exp as a list of tuples or as a dictionary
+    all_expenses = Expense.query.all()
+
+    # sum expenses per project and create dict per project with dates, status and total expenses
+    total_expenses_per_project = {}
+    for each_expense in all_expenses:
+        if each_expense.business_rel.title not in total_expenses_per_project:
+            temp_amount = each_expense.amount
+            total_expenses_per_project[each_expense.business_rel.title] = [temp_amount, each_expense.business_rel.date_start, each_expense.business_rel.date_end, each_expense.business_rel.active]
+
+        else:
+            total_expenses_per_project[each_expense.business_rel.title][0] += each_expense.amount
+
+    return total_expenses_per_project
 
 
 def list_total_sales_per_project():
-    pass # project_id: total_sale
+    sales = Sale.query.all()
+
+    # sum sales per project and create dict per project with dates, status and total revenues
+    total_sales_per_project = {}
+    for each_sale in sales:
+        if each_sale.business_rel.title not in total_sales_per_project:
+            temp_amount = each_sale.amount
+            total_sales_per_project[each_sale.business_rel.title] = [temp_amount,
+               each_sale.business_rel.date_start,
+               each_sale.business_rel.date_end,
+               each_sale.business_rel.active
+               ]
+        else:
+            total_sales_per_project[each_sale.business_rel.title][0] += each_sale.amount
+
+    return total_sales_per_project
+
+
+def all_projects():
+    all_registered_projects = Business.query.count()
+    return all_registered_projects
+
+
+def active_projects():
+    all_active_projects = Business.query.filter_by(active=True).count()
+    return all_active_projects
+
+
+def closed_projects():
+    all_active_projects = Business.query.filter_by(active=False).count()
+    return all_active_projects
 
 
 @views.route('/projects', methods=['GET', 'POST'])

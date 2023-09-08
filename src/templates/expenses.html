@@ -7,7 +7,7 @@
     <div>
         <div class="row justify-content-center">
             <br>
-            <div class="col-md-4 mt-5">
+            <div class="form-card col-md-4 mt-5">
                 <h5 class="text-center bg-danger-subtle text-white p-3 rounded">Saisie dépense</h5>
                 <br />
                 <form action="" method="POST">
@@ -18,7 +18,7 @@
                       </div>
                       <div class="mb-3 col">
                         <label for="category" class="form-label">Catégorie</label>
-                        <select class="form-control" id="category" name="category">
+                        <select class="choice_class form-control" id="category" name="category">
                             <option value="">Choisir catégorie ...</option>
                             <option value="Capital">Capital</option>
                             <option value="MO ouvriers">MO ouvriers</option>
@@ -35,11 +35,11 @@
                   <div class="row">
                       <div class="mb-3 col">
                         <label for="date_transaction" class="form-label">Date opération</label>
-                        <input type="date" id="date_transaction" class="form-control" name="date_transaction">
+                        <input type="date" id="date_transaction" class="date_class form-control" name="date_transaction">
                       </div>
                       <div class="mb-3 col">
                         <label for="projet_id" class="form-label">Projet lié</label>
-                          <select class="form-control" name="project_id" id="projet_id">
+                          <select class="choice_class form-control" name="project_id" id="projet_id">
                               <option value="">Choisir projet ...</option>
                               {% for project in projects %}
                               <option value="{{ project.id }}">{{ project.title }}</option>
@@ -48,7 +48,7 @@
                       </div>
                       <div class="mb-3">
                         <label for="financier" class="form-label">Financier</label>
-                        <select class="form-control" id="financier" name="financier">
+                        <select class="choice_class form-control" id="financier" name="financier">
                             <option value="">Choisir financier ...</option>
                             <option value="François">François</option>
                             <option value="Nick">Nick</option>

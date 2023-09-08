@@ -6,7 +6,7 @@
         <h1  class="text-center bg-secondary text-white mt-3">Gestion projets</h1>
         <div class="row justify-content-center">
             <br>
-            <div class="col-md-4 mt-5">
+            <div class="form-card col-md-4 mt-5">
                 <h5 class="text-center bg-primary-subtle text-white p-3 rounded">Modification Projet: <b>{{ project.title }}</b></h5>
                 <br />
                 <form action="" method="POST">
@@ -27,11 +27,11 @@
                   <div class="row">
                       <div class="mb-3 col">
                         <label for="date_start" class="form-label">Date début</label>
-                        <input type="date" id="date_start" class="form-control" name="date_start" value="{{project.date_start}}">
+                        <input type="date" id="date_start" class="date_class form-control" name="date_start" value="{{project.date_start}}">
                       </div>
                       <div class="mb-3 col">
                         <label for="date_end" class="form-label">Date fin provisoire</label>
-                        <input type="date" id="date_end" class="form-control" name="date_end" value="{{project.date_end}}">
+                        <input type="date" id="date_end" class="date_class form-control" name="date_end" value="{{project.date_end}}">
                       </div>
                   </div>
                   <div class="row">

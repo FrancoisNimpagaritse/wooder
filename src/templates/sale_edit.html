@@ -3,11 +3,11 @@
 {% block title %}Edition Vente{% endblock %}}
 
 {% block content %}
-    <h1  class="text-center bg-secondary text-white mt-3">Suivi ventes.</h1>
+    <h1  class="text-center bg-secondary text-white mt-3">Suivi ventes</h1>
     <div>
         <div class="row justify-content-center">
             <br>
-            <div class="col-md-4 mt-5">
+            <div class="form-card col-md-4 mt-5">
                 <h5 class="text-center bg-primary-subtle text-white p-3 rounded">Modification vente</h5>
                 <br />
                 <form action="" method="POST">
@@ -21,12 +21,12 @@
                   </div>
                   <div class="row">
                       <div class="mb-3 col">
-                        <label for="date_transaction" class="form-label">Date début</label>
-                        <input type="date" id="date_transaction" class="form-control" name="date_transaction" value="{{ sale.date_transaction }}">
+                        <label for="date_transaction" class="form-label">Date opération</label>
+                        <input type="date" id="date_transaction" class="date_class form-control" name="date_transaction" value="{{ sale.date_transaction }}">
                       </div>
                       <div class="mb-3 col">
                         <label for="projet_id" class="form-label">Projet lié</label>
-                          <select name="project_id" id="projet_id">
+                          <select class="choice_class form-control" name="project_id" id="projet_id">
                               <option value="{{ sale.business_id }}">{{sale.business_rel.title}}</option>
                               {% for project in projects %}
                               <option value="{{ project.id }}">{{ project.title }}</option>

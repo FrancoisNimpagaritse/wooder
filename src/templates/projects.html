@@ -7,7 +7,7 @@
     <div>
         <div class="row justify-content-center">
             <br>
-            <div class="col-md-4 mt-5">
+            <div class="form-card col-md-4 mt-5">
                 <h5 class="text-center bg-primary-subtle text-white p-3 rounded">Création Projet</h5>
                 <br />
                 <form action="" method="POST">
@@ -28,11 +28,11 @@
                   <div class="row">
                       <div class="mb-3 col">
                         <label for="date_start" class="form-label">Date début</label>
-                        <input type="date" id="date_start" class="form-control" name="date_start">
+                        <input type="date" id="date_start" class="date_class form-control" name="date_start">
                       </div>
                       <div class="mb-3 col">
                         <label for="date_end" class="form-label">Date fin provisoire</label>
-                        <input type="date" id="date_end" class="form-control" name="date_end">
+                        <input type="date" id="date_end" class="date_class form-control" name="date_end">
                       </div>
                   </div>
                   <div class="row">
@@ -52,8 +52,8 @@
                 </form>
             </div>
 
-            <div>
-                <br />
+            <div class="table-card">
+                <h3>Nos projets</h3>
                 <table class="table">
                   <thead>
                     <tr>
@@ -73,7 +73,7 @@
                     <tr>
                       <th scope="row">{{ project.id }}</th>
                       <td>{{ project.title }}</td>
-                      <td>{% if project.active %} <h6 class="bg-info text-white text-center rounded-circle">oui</h6> {% else %} <h6 class="bg-danger rounded-circle text-white text-center">non</h6>{% endif %}</td>
+                      <td>{% if project.active %} <span class="badge success">Oui</span> {% else %} <span class="badge warning">Non</span> {% endif %}</td>
                       <td>{{ project.user_rel.firstname }} {{ project.user_rel.lastname }}</td>
                       <td>{{ "{:,.0f}".format(project.estimated_cost) }}</td>
                       <td>{{ "{:,.0f}".format(project.estimated_revenue) }}</td>
